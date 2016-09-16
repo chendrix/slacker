@@ -1,0 +1,22 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "github.com/nlopes/slack",
+			"repository": "https://github.com/nlopes/slack",
+			"vcs": "git",
+			"revision": "db68538b374a5f052bf6befea117ac74760f4e8e",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "golang.org/x/net/websocket",
+			"repository": "https://go.googlesource.com/net",
+			"vcs": "git",
+			"revision": "71a035914f99bb58fe82eac0f1289f10963d876c",
+			"branch": "master",
+			"path": "/websocket",
+			"notests": true
+		}
+	]
+}
