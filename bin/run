@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 
 ROOT_DIR=$(cd $(dirname $(dirname $0)) && pwd)
 
 "${ROOT_DIR}/bin/build"
 
 echo -e "Running Binary..."
-"${ROOT_DIR}/out/slacker"
+"${ROOT_DIR}/out/slacker" -configPath="${ROOT_DIR}/config.yml"
