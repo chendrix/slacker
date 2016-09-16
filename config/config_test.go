@@ -33,6 +33,8 @@ var _ = Describe("Config", func() {
 		})
 
 		It("does not return error on valid config", func() {
+			Expect(config.Validate()).To(Succeed())
+
 			Expect(config.SlackAPIToken).To(Equal("REPLACE_WITH_SLACK_API_TOKEN"))
 
 			sampleChannel := config.Channels[0]

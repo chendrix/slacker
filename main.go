@@ -12,6 +12,11 @@ func main() {
 		panic(err)
 	}
 
+	err = cfg.Validate()
+	if err != nil {
+		panic(err)
+	}
+
 	fmt.Println(cfg)
 	fmt.Println("Hello, World!")
 }
