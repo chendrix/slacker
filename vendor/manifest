@@ -2,10 +2,36 @@
 	"version": 0,
 	"dependencies": [
 		{
+			"importpath": "github.com/golang/protobuf/proto",
+			"repository": "https://github.com/golang/protobuf",
+			"vcs": "git",
+			"revision": "1f49d83d9aa00e6ce4fc8258c71cc7786aec968a",
+			"branch": "master",
+			"path": "/proto",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/golang/protobuf/ptypes/any",
+			"repository": "https://github.com/golang/protobuf",
+			"vcs": "git",
+			"revision": "1f49d83d9aa00e6ce4fc8258c71cc7786aec968a",
+			"branch": "master",
+			"path": "ptypes/any",
+			"notests": true
+		},
+		{
 			"importpath": "github.com/nlopes/slack",
 			"repository": "https://github.com/nlopes/slack",
 			"vcs": "git",
 			"revision": "db68538b374a5f052bf6befea117ac74760f4e8e",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/onsi/gomega",
+			"repository": "https://github.com/onsi/gomega",
+			"vcs": "git",
+			"revision": "d59fa0ac68bb5dd932ee8d24eed631cdd519efc3",
 			"branch": "master",
 			"notests": true
 		},
@@ -16,6 +42,14 @@
 			"revision": "71a035914f99bb58fe82eac0f1289f10963d876c",
 			"branch": "master",
 			"path": "/websocket",
+			"notests": true
+		},
+		{
+			"importpath": "gopkg.in/yaml.v2",
+			"repository": "https://gopkg.in/yaml.v2",
+			"vcs": "git",
+			"revision": "31c299268d302dd0aa9a0dcf765a3d58971ac83f",
+			"branch": "v2",
 			"notests": true
 		}
 	]

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -e
+
+ROOT_DIR=$(cd $(dirname $(dirname $0)) && pwd)
+
+echo -e "\nRunning tests..."
+ginkgo -r -p -race -keepGoing -randomizeAllSpecs -randomizeSuites "${ROOT_DIR}"
