@@ -1,0 +1,7 @@
+---
+applications:
+- name: slacker
+  command: slacker -configPath=$HOME/config.yml
+  health-check-type: none
+  env:
+    GOPACKAGENAME: github.com/chendrix/slacker
