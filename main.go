@@ -8,12 +8,12 @@ import (
 	"strings"
 
 	"code.cloudfoundry.org/lager"
+	"fmt"
 	"github.com/chendrix/slacker/config"
 	"github.com/nlopes/slack"
 	"github.com/xoebus/go-tracker"
-	"fmt"
-	"time"
 	"strconv"
+	"time"
 )
 
 func main() {
@@ -83,10 +83,10 @@ func main() {
 						s := tracker.Story{
 							Name: fmt.Sprintf("**Interrupt** from %v on %v", u.RealName, time.Unix(int64(timestamp), 0).String()),
 							Labels: []tracker.Label{
-								tracker.Label{ Name: "interrupt" },
+								tracker.Label{Name: "interrupt"},
 							},
-							Type: tracker.StoryTypeBug,
-							State: tracker.StoryStatePlanned,
+							Type:        tracker.StoryTypeBug,
+							State:       tracker.StoryStatePlanned,
 							Description: fmt.Sprintf(`From %v (%v) on %v:\n\n\n>%v`, u.RealName, u.Name, channel.SlackChannelName, ev.Msg.Text),
 						}
 
