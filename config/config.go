@@ -3,22 +3,26 @@ package config
 import (
 	"flag"
 
+	"gopkg.in/validator.v2"
+
+	"errors"
+	"fmt"
+
 	"code.cloudfoundry.org/cflager"
 	"code.cloudfoundry.org/lager"
+	"github.com/nlopes/slack"
 	"github.com/pivotal-cf-experimental/service-config"
-	"gopkg.in/validator.v2"
-	"fmt"
-	"errors"
 )
 
 type Config struct {
-	SlackAPIToken string `yaml:"SlackAPIToken" validate:"nonzero"`
-	Channels      []ChannelConfig `yaml:"Channels" validate:"nonzero,min=1"`
+	SlackAPIToken string           `yaml:"SlackAPIToken" validate:"nonzero"`
+	Channels      []*ChannelConfig `yaml:"Channels" validate:"nonzero,min=1"`
 	Logger        lager.Logger
 }
 
 type ChannelConfig struct {
 	SlackChannelName string `yaml:"SlackChannelName" validate:"nonzero"`
+	SlackChannelID   string
 	SlackTrigger     string `yaml:"SlackTrigger" validate:"nonzero"`
 	TrackerAPIToken  string `yaml:"TrackerAPIToken" validate:"nonzero"`
 	TrackerProject   string `yaml:"TrackerProject" validate:"nonzero"`
@@ -45,7 +49,7 @@ func NewConfig(osArgs []string) (*Config, error) {
 	return &rootConfig, err
 }
 
-func (c Config) Validate() error {
+func (c *Config) Validate() error {
 	rootConfigErr := validator.Validate(c)
 	var errString string
 	if rootConfigErr != nil {
@@ -69,7 +73,6 @@ func (c Config) Validate() error {
 	return nil
 }
 
-
 func formatErrorString(err error, keyPrefix string) string {
 	errs := err.(validator.ErrorMap)
 	var errsString string
@@ -77,4 +80,23 @@ func formatErrorString(err error, keyPrefix string) string {
 		errsString += fmt.Sprintf("%s%s : %s\n", keyPrefix, fieldName, validationMessage)
 	}
 	return errsString
+}
+
+func (c *Config) HydrateFromSlack(cs []slack.Channel) (err error) {
+	m := make(map[string]slack.Channel)
+
+	for _, c := range cs {
+		m[c.Name] = c
+	}
+
+	for _, channel := range c.Channels {
+		c, ok := m[channel.SlackChannelName]
+		if !ok {
+			return fmt.Errorf(`could not find information about channel "%v"`, channel.SlackChannelName)
+		}
+
+		channel.SlackChannelID = c.ID
+	}
+
+	return nil
 }

@@ -1,6 +1,6 @@
 SlackAPIToken: REPLACE_WITH_SLACK_API_TOKEN
 Channels:
-- SlackChannelName: "#default"
+- SlackChannelName: "default"
   SlackTrigger: "@interrupt"
   TrackerProject: REPLACE_WITH_TRACKER_PROJECT_NAME
   TrackerAPIToken: REPLACE_WITH_TRACKER_API_TOKEN
