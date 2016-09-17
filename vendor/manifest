@@ -76,6 +76,14 @@
 			"notests": true
 		},
 		{
+			"importpath": "github.com/xoebus/go-tracker",
+			"repository": "https://github.com/xoebus/go-tracker",
+			"vcs": "git",
+			"revision": "56ad65ab052bda92debaaf42471b64f756a23859",
+			"branch": "master",
+			"notests": true
+		},
+		{
 			"importpath": "golang.org/x/net/websocket",
 			"repository": "https://go.googlesource.com/net",
 			"vcs": "git",

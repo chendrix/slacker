@@ -10,6 +10,10 @@ import (
 	"code.cloudfoundry.org/lager"
 	"github.com/chendrix/slacker/config"
 	"github.com/nlopes/slack"
+	"github.com/xoebus/go-tracker"
+	"fmt"
+	"time"
+	"strconv"
 )
 
 func main() {
@@ -63,6 +67,32 @@ func main() {
 						logger.Debug("Message Response Triggered", lager.Data{
 							"message": ev.Msg.Text,
 						})
+
+						u, err := api.GetUserInfo(ev.Msg.User)
+						if err != nil {
+							logger.Error("error getting user info", err, lager.Data{"userID": ev.Msg.User})
+							continue
+						}
+
+						timestamp, err := strconv.ParseFloat(ev.Msg.Timestamp, 64)
+						if err != nil {
+							logger.Error("error converting timestamp", err, lager.Data{"timestamp": ev.Msg.Timestamp})
+							continue
+						}
+
+						s := tracker.Story{
+							Name: fmt.Sprintf("**Interrupt** from %v on %v", u.RealName, time.Unix(int64(timestamp), 0).String()),
+							Labels: []tracker.Label{
+								tracker.Label{ Name: "interrupt" },
+							},
+							Type: tracker.StoryTypeBug,
+							State: tracker.StoryStatePlanned,
+							Description: fmt.Sprintf(`From %v (%v) on %v:\n\n\n>%v`, u.RealName, u.Name, channel.SlackChannelName, ev.Msg.Text),
+						}
+
+						logger.Debug("creating story", lager.Data{
+							"story": s,
+						})
 					}
 				}
 			case *slack.RTMError:
@@ -77,4 +107,3 @@ func main() {
 		}
 	}
 }
-
