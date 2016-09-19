@@ -25,7 +25,7 @@ type ChannelConfig struct {
 	SlackChannelID   string
 	SlackTrigger     string `yaml:"SlackTrigger" validate:"nonzero"`
 	TrackerAPIToken  string `yaml:"TrackerAPIToken" validate:"nonzero"`
-	TrackerProject   string `yaml:"TrackerProject" validate:"nonzero"`
+	TrackerProjectID int    `yaml:"TrackerProjectID" validate:"nonzero"`
 }
 
 func NewConfig(osArgs []string) (*Config, error) {

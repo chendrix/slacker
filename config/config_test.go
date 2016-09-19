@@ -39,7 +39,7 @@ var _ = Describe("Config", func() {
 
 			sampleChannel := config.Channels[0]
 			Expect(sampleChannel.SlackChannelName).To(Equal("default"))
-			Expect(sampleChannel.TrackerProject).To(Equal("REPLACE_WITH_TRACKER_PROJECT_NAME"))
+			Expect(sampleChannel.TrackerProjectID).To(Equal(-1))
 			Expect(sampleChannel.TrackerAPIToken).To(Equal("REPLACE_WITH_TRACKER_API_TOKEN"))
 			Expect(sampleChannel.SlackTrigger).To(Equal("@interrupt"))
 		})
